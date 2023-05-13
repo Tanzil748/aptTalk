@@ -12,7 +12,9 @@ const Header = () => {
       <div>
         <Link to="/" className={css.left}>
           <MdMapsHomeWork size={30} />
-          <span>AptTalk</span>
+          <div>
+            Apt<span style={{ color: "red" }}>Talk</span>
+          </div>
         </Link>
       </div>
       <div className={css.right}>
