@@ -1,7 +1,12 @@
 import React from "react";
 import css from "../styles/home.module.css";
 import FollowList from "../components/FollowList";
-import { BiUpvote, BiDownvote, BiChat } from "react-icons/bi";
+import {
+  BiUpvote,
+  BiDownvote,
+  BiChat,
+  BiMessageSquareAdd,
+} from "react-icons/bi";
 
 const HomePage = () => {
   const fakeData = [
@@ -37,6 +42,12 @@ const HomePage = () => {
         <FollowList />
       </div>
       <div className={css.rightSide}>
+        <div className={css.buttonWrapper}>
+          <button className={css.addButton}>
+            <span>Add Post</span>
+            <BiMessageSquareAdd size={20} />
+          </button>
+        </div>
         {fakeData.map((post) => (
           <div key={post.id} className={css.postCard}>
             <div className={css.topRow}>
@@ -50,15 +61,15 @@ const HomePage = () => {
               <img src={post.picture} alt="" className={css.pic} />
             </div>
             <div className={css.feedback}>
-              <div>
+              <div className={css.reactButton}>
                 <BiUpvote size={20} />
                 <span>Upvote</span>
               </div>
-              <div>
+              <div className={css.reactButton}>
                 <BiDownvote size={20} />
                 <span>Downvote</span>
               </div>
-              <div>
+              <div className={css.reactButton}>
                 <BiChat size={20} />
                 <span>Comments</span>
               </div>
