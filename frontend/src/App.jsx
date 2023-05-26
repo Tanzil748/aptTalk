@@ -4,8 +4,11 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
+import { useContext } from "react";
+import AuthContext from "./context/AuthContext";
 
 const App = () => {
+  const { loggedUser } = useContext(AuthContext);
   const router = createBrowserRouter([
     {
       path: "/",

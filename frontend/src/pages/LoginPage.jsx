@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import css from "../styles/login.module.css";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const LoginPage = () => {
+  const { login } = useContext(AuthContext);
+
+  const loginHandler = () => {
+    login();
+  };
+
   return (
     <div className={css.backdrop}>
       <form action="POST" className={css.form_container}>
@@ -31,6 +38,7 @@ const LoginPage = () => {
         <button
           style={{ marginTop: "10px", padding: "8px" }}
           className={css.btn}
+          onClick={loginHandler}
         >
           Log In
         </button>
