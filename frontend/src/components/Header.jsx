@@ -25,7 +25,7 @@ const Header = () => {
           to="/profile/:id"
           style={{ color: "black", textDecoration: "none" }}
         >
-          My Profile
+          Profile
         </Link>
         <div
           className={css.userProfile}
