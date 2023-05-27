@@ -28,7 +28,7 @@ const CommentSection = () => {
     },
   ];
   return (
-    <div className={css.layout}>
+    <div>
       <div className={css.commentInput}>
         <input type="text" placeholder="Enter a comment" />
         <button>Post</button>
@@ -38,7 +38,7 @@ const CommentSection = () => {
           <div className={css.topRow}>
             <div style={{ fontWeight: "600" }}>@{comment.username}</div>
             <div style={{ color: "lightgray" }}>|</div>
-            <div style={{ color: "gray" }}>Time</div>
+            <div style={{ color: "gray", fontSize: "12px" }}>Time</div>
           </div>
           <div className={css.content}>
             <div style={{ fontSize: "0.9rem" }}>{comment.message}</div>
