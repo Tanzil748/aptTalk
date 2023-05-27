@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "../styles/userPost.module.css";
 import { BiUpvote, BiDownvote, BiChat } from "react-icons/bi";
+import CommentSection from "./CommentSection";
 
 const UserPost = ({ post }) => {
+  const [openComment, setOpenComment] = useState(false);
+
   return (
     <div key={post.id} className={css.postCard}>
       <div className={css.topRow}>
@@ -24,11 +27,15 @@ const UserPost = ({ post }) => {
           <BiDownvote size={20} />
           <span>Downvote</span>
         </div>
-        <div className={css.reactButton}>
+        <div
+          className={css.reactButton}
+          onClick={() => setOpenComment(!openComment)}
+        >
           <BiChat size={20} />
           <span>Comments</span>
         </div>
       </div>
+      {openComment && <CommentSection />}
     </div>
   );
 };
