@@ -22,3 +22,9 @@
   align-items: center;
   gap: 5px;
 }
+
+@media screen and (max-width: 1110px) {
+  .followButton {
+    margin-left: 10px;
+  }
+}

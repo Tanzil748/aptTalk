@@ -5,6 +5,7 @@
 
 .leftMenu {
   flex: 2;
+  max-width: 768px;
 }
 
 .rightSide {
@@ -29,4 +30,10 @@
   gap: 3px;
   background-color: lightcoral;
   color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .leftMenu {
+    display: none;
+  }
 }
