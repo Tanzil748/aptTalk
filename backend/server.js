@@ -1,9 +1,10 @@
-const express = require("express");
+import express from "express";
 const app = express();
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 const port = process.env.PORT || 4500;
-const pool = require("./db/connectDb.js");
-const cors = require("cors");
+import { pool } from "./db/connectDb.js";
+import cors from "cors";
 
 // middleware
 app.use(cors());
@@ -12,7 +13,15 @@ app.use(express.json());
 // routes
 
 // this is a test
-app.post("/api/v1/test", async (req, res) => {
+app.get("/api/v1/test", async (req, res) => {
+  try {
+    res.send("Hello");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/v1/post", async (req, res) => {
   try {
     console.log(req.body);
   } catch (error) {
