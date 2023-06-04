@@ -1,5 +1,5 @@
 import { pool } from "../db/connectDb.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
@@ -18,8 +18,8 @@ export const register = async (req, res) => {
     }
 
     // Bcrypt password
-    const salt = bcrypt.genSaltSync(10);
-    const hashed = bcrypt.hashSync(userPassword, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(userPassword, salt);
 
     // now create the new user
     const registerNewUser = await pool.query(
@@ -68,24 +68,9 @@ export const login = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res
-      .cookie("accessToken", jwtToken, {
-        httpOnly: true,
-      })
-      .status(200)
-      .json({ jwtToken });
+    return res.json({ jwtToken });
   } catch (error) {
     console.log(error);
     res.status(500).send("Server not working");
   }
-};
-
-export const logout = async (req, res) => {
-  res
-    .clearCookie("accessToken", {
-      secure: true,
-      sameSite: "none",
-    })
-    .status(200)
-    .json("Current user logged out.");
 };

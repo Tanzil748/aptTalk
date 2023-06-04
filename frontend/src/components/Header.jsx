@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import css from "../styles/header.module.css";
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthContext";
 
 const Header = () => {
   const [userDrop, setUserDrop] = useState(false);
-  const { loggedUser } = useContext(AuthContext);
+  const { loggedIn, loggedUser } = useContext(AuthContext);
 
   return (
     <div className={css.layout}>
@@ -34,7 +34,7 @@ const Header = () => {
           <BiUserCircle size={30} />
           {userDrop && <UserDropdown />}
           {/* make sure to add ? since loggedUser does not exist before */}
-          <span>{loggedUser?.username}</span>{" "}
+          <span>{loggedIn ? loggedUser?.userName : null}</span>
         </div>
       </div>
     </div>

@@ -1,40 +1,66 @@
-import React from "react";
+import { useState } from "react";
 import css from "../styles/register.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const RegisterPage = () => {
+  const [userInputs, setUserInputs] = useState({
+    userName: "",
+    email: "",
+    userPassword: "",
+  });
+  const [errors, setErrors] = useState(null);
+
+  const navigate = useNavigate();
+
+  // handle form submission
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:4500/auth/register", userInputs);
+      navigate("/login");
+    } catch (error) {
+      setErrors(error.response.data);
+    }
+  };
+
+  // handle user input
+  const changeHandler = (e) => {
+    setUserInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <div className={css.backdrop}>
-      <form action="POST" className={css.form_container}>
+      <form onSubmit={registerHandler} className={css.form_container}>
         <h2 style={{ textAlign: "center", paddingBottom: "10px" }}>REGISTER</h2>
         <hr />
-        <label htmlFor="username" className={css.labelStyle}>
-          Username:{" "}
-        </label>
+        <div style={{ color: "red", fontSize: "0.8rem", textAlign: "center" }}>
+          {errors && errors}
+        </div>
+        <label className={css.labelStyle}>Username:</label>
         <input
-          id="username"
+          name="userName"
           type="text"
           placeholder="Enter a username..."
           className={css.inputStyle}
+          onChange={changeHandler}
         />
-        <label htmlFor="email" className={css.labelStyle}>
-          Email:{" "}
-        </label>
+        <label className={css.labelStyle}>Email:</label>
         <input
-          id="email"
+          name="email"
           type="email"
           placeholder="Enter your email..."
           className={css.inputStyle}
+          onChange={changeHandler}
         />
 
-        <label htmlFor="password" className={css.labelStyle}>
-          Password:{" "}
-        </label>
+        <label className={css.labelStyle}>Password:</label>
         <input
-          id="password"
+          name="userPassword"
           type="password"
           placeholder="Enter password..."
           className={css.inputStyle}
+          onChange={changeHandler}
         />
 
         <button
